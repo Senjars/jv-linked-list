@@ -108,8 +108,6 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T> {
         checkIndexForAccess(index);
         Node<T> nodeToRemove = getNode(index);
 
-        T removedValue = nodeToRemove.getValue();
-
         if (nodeToRemove.getPrev() != null) {
             nodeToRemove.getPrev().setNext(nodeToRemove.getNext());
         } else {
@@ -124,9 +122,11 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T> {
 
         nodeToRemove.setPrev(null);
         nodeToRemove.setNext(null);
-        nodeToRemove.setValue(null);
 
+        final T removedValue = nodeToRemove.getValue(); // <-- moved here
+        nodeToRemove.setValue(null);
         size--;
+
         return removedValue;
     }
 
