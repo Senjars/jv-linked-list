@@ -125,8 +125,6 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T> {
     }
 
     private T unlink(Node<T> node) {
-        T removedValue = node.getValue();
-
         if (node.getPrev() != null) {
             node.getPrev().setNext(node.getNext());
         } else {
@@ -141,11 +139,14 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T> {
 
         node.setPrev(null);
         node.setNext(null);
+
+        final T removedValue = node.getValue();
         node.setValue(null);
         size--;
 
         return removedValue;
     }
+
 
     private static class Node<T> {
         private T value;
